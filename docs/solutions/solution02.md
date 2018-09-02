@@ -4,7 +4,7 @@ Lab 2: Intensity
 This session covers exploratory tools for investigating intensity.
 The lecturer's R script is [available here](https://raw.githubusercontent.com/spatstat/testWorkshop/master/Scripts/script02.R) (right click and save).
 
-``` r
+``` {.r}
 library(spatstat)
 ```
 
@@ -14,36 +14,26 @@ The dataset `japanesepines` contains the locations of Japanese Black Pine trees 
 
 1.  Plot the `japanesepines` data.
 
-    ``` r
+    ``` {.r}
     plot(japanesepines)
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-3-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 2.  Use the command `quadratcount` to divide the study region of the Japanese Pines data into a 3x3 array of equal quadrats, and count the number of trees in each quadrat.
 
     We count the number of Japanese Pines and print the results:
 
-    ``` r
+    ``` {.r}
     qc <- quadratcount(japanesepines, nx = 3)
     qc
     ```
 
-        ##                                        x
-        ## y                                       [0,0.333333333333333)
-        ##   [0.666666666666667,1]                                     6
-        ##   [0.333333333333333,0.666666666666667)                    10
-        ##   [0,0.333333333333333)                                     4
-        ##                                        x
-        ## y                                       [0.333333333333333,0.666666666666667)
-        ##   [0.666666666666667,1]                                                    15
-        ##   [0.333333333333333,0.666666666666667)                                     4
-        ##   [0,0.333333333333333)                                                     8
-        ##                                        x
-        ## y                                       [0.666666666666667,1]
-        ##   [0.666666666666667,1]                                     7
-        ##   [0.333333333333333,0.666666666666667)                     3
-        ##   [0,0.333333333333333)                                     8
+        ##                x
+        ## y               [0,0.333) [0.333,0.667) [0.667,1]
+        ##   [0.667,1]             6            15         7
+        ##   [0.333,0.667)        10             4         3
+        ##   [0,0.333)             4             8         8
 
     By default, `quadratcount` uses the same number of division of the y-axis as given by `nx`.
 
@@ -51,18 +41,18 @@ The dataset `japanesepines` contains the locations of Japanese Black Pine trees 
 
     We do the superimposed plotting in the following manner:
 
-    ``` r
+    ``` {.r}
     plot(qc, main = "")
     plot(japanesepines, add = TRUE, pch = 16, cex = 0.5)
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-5-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-4.  Use the command `quadrat.test` to perform the *χ*-square test of CSR on the Japanese Pines data.
+4.  Use the command `quadrat.test` to perform the \(\chi\)-square test of CSR on the Japanese Pines data.
 
     We do the Chi-squarred test with the following line.
 
-    ``` r
+    ``` {.r}
     chisq.res <- quadrat.test(qc)
     print(chisq.res)
     ```
@@ -83,22 +73,22 @@ The dataset `japanesepines` contains the locations of Japanese Black Pine trees 
 
     To plot the expected, observed, and residual counts we do the following:
 
-    ``` r
+    ``` {.r}
     plot(chisq.res, main = "", cex = 1.5, col = "red")
     plot(japanesepines, add = TRUE, cex = 0.5, pch = 16)
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-7-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 ### Exercise 2
 
 Japanese Pines, continued:
 
-1.  Using `density.ppp`, compute a kernel estimate of the spatially-varying intensity function for the Japanese pines data, using a Gaussian kernel with standard deviation *σ* = 0.1 units, and store the estimated intensity in an object `D` say.
+1.  Using `density.ppp`, compute a kernel estimate of the spatially-varying intensity function for the Japanese pines data, using a Gaussian kernel with standard deviation \(\sigma=0.1\) units, and store the estimated intensity in an object `D` say.
 
     From the documentation (`?density.ppp`) we see that the following will work:
 
-    ``` r
+    ``` {.r}
     D <- density(japanesepines, sigma = 0.1)
     ```
 
@@ -106,37 +96,37 @@ Japanese Pines, continued:
 
     The plotting of the colour image is automatically done by dispatched call to the `plot.im` method by calling `plot` on the `im` object.
 
-    ``` r
+    ``` {.r}
     plot(D, main = "")
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-9-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 3.  Plot a colour image of the kernel estimate `D` with the original Japanese Pines data superimposed.
 
     Again, we can use the `add = TRUE` functionality of the plotting methods.
 
-    ``` r
+    ``` {.r}
     plot(D, main = "")
     plot(japanesepines, add = TRUE, cols = "white", cex = 0.5, pch = 16)
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-10-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 4.  Plot the kernel estimate without the ‘colour ribbon’.
 
     From `help("plot.im")` we see that `ribbon = FALSE` disables the colour key:
 
-    ``` r
+    ``` {.r}
     plot(D, main = "", ribbon = FALSE)
     plot(japanesepines, add = TRUE, cols = "white", cex = 0.5, pch = 16)
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-11-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 5.  Try the following command
 
-    ``` r
+    ``` {.r}
     persp(D, theta=70, phi=25, shade=0.4)
     ```
 
@@ -144,21 +134,21 @@ Japanese Pines, continued:
 
     It dispatches to `persp.im`, but these arguments are then passed down to `persp.default` through the dots (`...`). From the documentation of `persp.default` they are "angles defining the viewing direction. `theta` gives the azimuthal direction and `phi` the colatitude." The `shade` controls the shading of the surface facets.
 
-    ``` r
+    ``` {.r}
     persp(D, theta=70, phi=25, shade=0.4, main = "")
     ```
 
-    ![](solution02_files/figure-markdown_github/unnamed-chunk-13-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution02_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 ### Exercise 3
 
 More Japanese Pines:
 
-1.  Compute a kernel estimate of the intensity for the Japanese Pines data using a Gaussian kernel with standard deviation *σ* = 0.15.
+1.  Compute a kernel estimate of the intensity for the Japanese Pines data using a Gaussian kernel with standard deviation \(\sigma=0.15\).
 
     As before:
 
-    ``` r
+    ``` {.r}
     D2 <- density(japanesepines, sigma = 0.15)
     ```
 
@@ -166,13 +156,13 @@ More Japanese Pines:
 
     Both `summary` and `range` show the intensity range:
 
-    ``` r
+    ``` {.r}
     range(D2)
     ```
 
         ## [1]  31.30041 118.22184
 
-    ``` r
+    ``` {.r}
     summary(D2)
     ```
 
@@ -192,13 +182,13 @@ More Japanese Pines:
 
     This seems to be true by the following output:
 
-    ``` r
+    ``` {.r}
     integral(D2)
     ```
 
         ## [1] 63.41479
 
-    ``` r
+    ``` {.r}
     japanesepines
     ```
 

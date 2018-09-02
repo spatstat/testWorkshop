@@ -4,30 +4,42 @@ Lab 11: Multitype summary functions and models
 This session is concerned with summary statistics and Gibbs models for multitype point patterns.
 The lecturer's R script is [available here](https://raw.githubusercontent.com/spatstat/testWorkshop/master/Scripts/script11.R) (right click and save).
 
-``` r
+``` {.r}
 library(spatstat)
 ```
+
+    ## Loading required package: spatstat.data
+
+    ## Loading required package: methods
+
+    ## Loading required package: nlme
+
+    ## Loading required package: rpart
+
+    ## 
+    ## spatstat 1.56-1.007       (nickname: 'Damn You Autocorrect') 
+    ## For an introduction to spatstat, type 'beginner'
 
 ### Exercise 1
 
 The `amacrine` dataset contains the locations of cells of two types (“on” and “off” detectors) in a layer of the retina.
 
-1.  Compute and plot the bivariate *L* function for the amacrine data.
+1.  Compute and plot the bivariate \(L\) function for the amacrine data.
 
-    ``` r
+    ``` {.r}
     Lam <- alltypes(amacrine, "L")
     plot(Lam)
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-3-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 2.  plot estimates of the bivariate pair correlation functions by
 
-    ``` r
+    ``` {.r}
     plot(alltypes(amacrine, pcfcross))
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-4-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 3.  What is the overall interpretation of these summary functions?
 
@@ -37,23 +49,23 @@ The `amacrine` dataset contains the locations of cells of two types (“on” an
 
 Continuing with the `amacrine` data,
 
-1.  Use `alltypes` to plot the bivariate *G*-functions *G*<sub>*i**j*</sub> for each pair of types *i*, *j* in the amacrine data.
+1.  Use `alltypes` to plot the bivariate \(G\)-functions \(G_{ij}\) for each pair of types \(i,j\) in the amacrine data.
 
-    ``` r
+    ``` {.r}
     plot(alltypes(amacrine, Gcross))
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-5-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-2.  Use `alltypes` to plot the functions *G*<sub>*i*•</sub> (`Gdot` in `spatstat`) for each type *i* in the amacrine data.
+2.  Use `alltypes` to plot the functions \(G_{i\bullet}\) (`Gdot` in `spatstat`) for each type \(i\) in the amacrine data.
 
-    ``` r
+    ``` {.r}
     plot(alltypes(amacrine, Gdot))
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-6-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
-3.  What is the overall interpretation of the *G*-functions?
+3.  What is the overall interpretation of the \(G\)-functions?
 
     Same as before.
 
@@ -63,13 +75,13 @@ The dataset `bramblecanes` gives the locations and ages of bramble cane plants i
 
 1.  Read the help for the command `rlabel`.
 
-2.  We will use the bivariate *K*-function *K*<sub>2, 0</sub> as our summary statistic. Compute this for the data using `Kcross(bramblecanes, "2", "0")` and plot it.
+2.  We will use the bivariate \(K\)-function \(K_{2,0}\) as our summary statistic. Compute this for the data using `Kcross(bramblecanes, "2", "0")` and plot it.
 
-    ``` r
+    ``` {.r}
     plot(Kcross(bramblecanes, "2", "0"))
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-7-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 3.  Read the help for `Kcross`. Find the names of the second and third arguments to the function.
 
@@ -77,7 +89,7 @@ The dataset `bramblecanes` gives the locations and ages of bramble cane plants i
 
 4.  Generate the simulation envelopes as follows
 
-    ``` r
+    ``` {.r}
     shuffle <- expression(rlabel(bramblecanes))
     E <- envelope(bramblecanes, Kcross, nsim=19, simulate=shuffle, i="2", j="0")
     ```
@@ -87,21 +99,21 @@ The dataset `bramblecanes` gives the locations and ages of bramble cane plants i
         ## 
         ## Done.
 
-    ``` r
+    ``` {.r}
     plot(E)
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-8-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
     Note that the named arguments `i` and `j` are not recognised by the `envelope` command (as we can check from the help file for `envelope`), so they are passed to the command `Kcross` as we intended.
 
-5.  Generate the corresponding simulation envelopes of the bivariate *L*-function, either by replacing `Kcross` by `Lcross` in the code above, or by
+5.  Generate the corresponding simulation envelopes of the bivariate \(L\)-function, either by replacing `Kcross` by `Lcross` in the code above, or by
 
-    ``` r
+    ``` {.r}
     plot(E, sqrt(./pi) ~ r)
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-9-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 ### Exercise 4
 
@@ -109,35 +121,35 @@ We want to fit a Gibbs process model to the `betacells` data.
 
 1.  Access the `betacells` data and plot the pattern.
 
-    ``` r
+    ``` {.r}
     plot(betacells, main = "Beta cells")
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-10-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 2.  Save the data as a point pattern `X` and save only the mark `type`
 
-    ``` r
+    ``` {.r}
     X <- betacells
     marks(X) <- marks(betacells)$type
     ```
 
     Also we will save the two type names:
 
-    ``` r
+    ``` {.r}
     typ <- levels(marks(X))
     ```
 
-3.  Plot the bivariate *K* functions.
+3.  Plot the bivariate \(K\) functions.
 
     1.  Does it appear that cells of the same type interact? If so, guess at a suitable interaction distance.
     2.  Does it appear that cells of different types interact? If so, guess at a suitable interaction distance.
 
-    ``` r
+    ``` {.r}
     plot(alltypes(X, Kcross))
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-13-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
     Yes, points of same type appear to be interacting at e.g. 60 microns.
 
@@ -145,36 +157,36 @@ We want to fit a Gibbs process model to the `betacells` data.
 
 4.  Fit a multitype Strauss model using the selected interactions. For example if your answer to question *i* was “yes, at 20 microns” and your answer to question *ii* was “yes, at 30 microns”,
 
-    ``` r
+    ``` {.r}
     rad <- matrix(c(20,30,30,20), 2, 2)
     ppm(X ~ marks, MultiStrauss(typ,rad))
     ```
 
     while if your answer to question *i* was “no” and your answer to question *ii* was “yes, at 60 microns”,
 
-    ``` r
+    ``` {.r}
     rad <- matrix(c(NA,60,60,NA), 2, 2)
     ppm(X ~ marks, MultiStrauss(typ,rad))
     ```
 
-    ``` r
+    ``` {.r}
     rad <- matrix(c(60,NA,NA,60), 2, 2)
     fit <- ppm(X ~ marks, MultiStrauss(typ,rad))
     ```
 
     Interpret the fitted model. Plot the array of fitted pairwise interactions using `plot(fitin(fit))` where `fit` is the fitted model. What is the fitted strength of the interaction?
 
-    ``` r
+    ``` {.r}
     plot(fitin(fit))
     ```
 
-    ![](solution11_files/figure-markdown_github/unnamed-chunk-17-1.png)
+    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution11_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
     The fitted interaction is very strong for same type cells (and absent for opposite types).
 
 5.  For comparison purposes, fit the following models, interpret them, and compare the results:
 
-    ``` r
+    ``` {.r}
     fitU <- ppm(X ~ marks, Strauss(60))
     rad <- matrix(60, 2, 2)
     fitE <- ppm(X ~ marks, MultiStrauss(rad))
@@ -182,25 +194,25 @@ We want to fit a Gibbs process model to the `betacells` data.
 
 ### Exercise 5
 
-Here we will use profile pseudolikelihood to estimate the interaction distances for the multitype Strauss model in Question 4. We’ll assume that points of different types do not interact, and that points of the same type interact at a distance *R* which is the same for each type.
+Here we will use profile pseudolikelihood to estimate the interaction distances for the multitype Strauss model in Question 4. We’ll assume that points of different types do not interact, and that points of the same type interact at a distance \(R\) which is the same for each type.
 
-1.  Create a vector of values of *R* to search over:
+1.  Create a vector of values of \(R\) to search over:
 
-    ``` r
+    ``` {.r}
     rval <- data.frame(R=seq(50,100,by=5))
     ```
 
     This will become the argument `s` of `profilepl`.
 
-2.  We need the argument `f` of `profilepl`, and this should be a function that takes the value *R* and produces a multitype Strauss interaction. So define
+2.  We need the argument `f` of `profilepl`, and this should be a function that takes the value \(R\) and produces a multitype Strauss interaction. So define
 
-    ``` r
+    ``` {.r}
     MS <- function(R){ MultiStrauss(diag(c(R,R))) }
     ```
 
     Try typing `MS(50)` to check that this is what you expect.
 
-    ``` r
+    ``` {.r}
     MS(50)
     ```
 
@@ -215,7 +227,7 @@ Here we will use profile pseudolikelihood to estimate the interaction distances 
 
 3.  Then we can use maximum profile pseudolikelihood:
 
-    ``` r
+    ``` {.r}
     profilepl(rval, MS, X ~ marks)
     ```
 
