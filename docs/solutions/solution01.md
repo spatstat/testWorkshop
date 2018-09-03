@@ -30,7 +30,7 @@ We will study a dataset that records the locations of Ponderosa Pine trees (*Pin
     plot(X)
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-4-1.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
     By the S3 method dispatch, this calls the `plot.ppp` function. The `chars` argument indicate that the point type should be be periods ("`.`").
 
@@ -104,7 +104,7 @@ The Ponderosa data, continued:
     plot(ponderosa, main = "Ponderosa Pine Trees")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-9-1.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 3.  from your reading of the help file, predict what will happen if we type
 
@@ -120,7 +120,7 @@ The Ponderosa data, continued:
     plot(ponderosa, chars="X", cols="green")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-11-1.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 4.  try different values of the argument `chars`, for example, one of the integers 0 to 25, or a letter of the alphabet. (Note the difference between `chars=3` and `chars="+"`, and the difference between `chars=4` and `chars="X"`).
 
@@ -130,25 +130,25 @@ The Ponderosa data, continued:
     plot(ponderosa, chars=3, cols="green")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-12-1.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
     ``` {.r}
     plot(ponderosa, chars="+", cols="green")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-12-2.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-12-2.png)
 
     ``` {.r}
     plot(ponderosa, chars=4, cols="green")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-12-3.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-12-3.png)
 
     ``` {.r}
     plot(ponderosa, chars="X", cols="green")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-12-4.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-12-4.png)
 
 ### Exercise 3
 
@@ -174,7 +174,7 @@ P <- ppp(x = x, y = y, window = w)
 plot(P, main = "Scintillation events")
 ```
 
-![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-15-1.png)
+![](solution01_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 ### Exercise 4
 
@@ -227,4 +227,4 @@ It records the locations of anthills recorded in a 1200x1500 metre study region 
     plot(hills, pch = 16, cex = 0.3, main = "Anthill locations")
     ```
 
-    ![](/home/rubak/spatstat/testWorkshop/docs/solutions/solution01_files/figure-markdown_github/unnamed-chunk-19-1.png)
+    ![](solution01_files/figure-markdown_github/unnamed-chunk-19-1.png)
